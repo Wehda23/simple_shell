@@ -1,9 +1,11 @@
-#include <stdio.h>
-
+#include "waheed.h"
 
 int main(void)
 {
-    printf("Working\n");
-
+    while (1)
+    {
+        prompt();
+        break;
+    }
     return (-1);
 }
