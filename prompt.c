@@ -5,7 +5,8 @@
  * prompt - is a function that prints ($) prompt
  * Return: void
  */
-void prompt(void)
+void prompt()
 {
-	printf("$ ");
+    printf("$ ");
+    fflush(stdout);
 }
