@@ -33,9 +33,26 @@ void echo_command(char **commands, char *file)
     if (pid == -1) {
         perror(file);
     } else if (pid == 0) {
-        if (execve("/bin/echo", commands, NULL) == -1) {
-            perror(file);
+        int i = 1;
+        if (commands[1] != NULL) {
+            while (commands[i] != NULL) {
+                if (strcmp(commands[i], "$$") == 0) {
+                    printf("%d", getpid());
+                } else if (strcmp(commands[i], "$?") == 0) {
+                    printf("%d", WEXITSTATUS(status));
+                } else {
+                    printf("%s", commands[i]);
+                }
+
+                if (commands[i + 1] != NULL) {
+                    printf(" ");
+                }
+                i++;
+            }
         }
+        printf("\n");
+
+        exit(EXIT_SUCCESS);
     } else {
         waitpid(pid, &status, 0);
     }
