@@ -9,7 +9,7 @@
 void free_commands(char ***commands)
 {
 	int index = 0;
-	
+
 	while ((*commands)[index] != NULL)
 	{
 		free((*commands)[index]);

@@ -45,27 +45,19 @@ void echo_command(char **commands, char *file)
 	else if (pid == 0)
 	{
 		int i = 1;
-        
+
 		if (commands[1] != NULL)
 		{
 			while (commands[i] != NULL)
 			{
 				if (strcmp(commands[i], "$$") == 0)
-				{
 					printf("%d", getpid());
-				}
 				else if (strcmp(commands[i], "$?") == 0)
-				{
 					printf("%d", WEXITSTATUS(status));
-				}
 				else
-				{
 					printf("%s", commands[i]);
-				}
 				if (commands[i + 1] != NULL)
-				{
 					printf(" ");
-				}
 				i++;
 			}
 		}
@@ -82,7 +74,6 @@ void echo_command(char **commands, char *file)
 /**
  * exit_command - Exit shell
  * @commands: command pass in to the function
- * @file: execution file name.
  */
 void exit_command(char **commands)
 {
