@@ -7,7 +7,7 @@
  */
 void ls_command(char **commands, char *file)
 {
-    pid_t pid = fork(); // Create a new process
+    pid_t pid = fork();
     int status;
     if (pid == -1) {
         perror(file);
