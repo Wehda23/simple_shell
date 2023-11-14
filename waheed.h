@@ -17,6 +17,7 @@ extern char **environ;
 void prompt();
 /* listing_command.c */
 void ls_command(char **command, char *file);
+void echo_command(char **commands, char *file);
 
 /* _getline.c */
 int _getline(int fd, void *buf, int count);
