@@ -8,10 +8,10 @@
  */
 void print_commands(char **commands)
 {
-    int index = 0;
-    while (commands[index] != NULL)
-    {
-        printf("Command entered: %s\n", commands[index]);
-        index++;
-    }
+	int index = 0;
+	while (commands[index] != NULL)
+	{
+		printf("Command entered: %s\n", commands[index]);
+		index++;
+	}
 }

@@ -23,6 +23,8 @@ void exit_command(char **commands);
 
 /* env_commands.c */
 void print_env(char *file);
+void add_env(char **commands, char *file);
+void remove_env(char **commands, char *file);
 
 /* _getline.c */
 int _getline(int fd, void *buf, int count);

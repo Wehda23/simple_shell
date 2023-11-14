@@ -5,84 +5,95 @@
  * _strtok - Function that tokenize (splits) string into array of tokens.
  * @command: pointer to a command string.
  * @delim: delimiter to split by.
- * Return: array of tokens generated from the command string input. 
+ * Return: array of tokens generated from the command string input.
  */
 char * _strtok(char *command, char *delim)
 {
-    static char *lastToken = NULL;
-    char *token;
+	static char *lastToken = NULL;
+	char *token;
 
-    if (command != NULL) {
-        lastToken = command;
-    }
+	if (command != NULL)
+	{
+		lastToken = command;
+	}
 
-    if (lastToken == NULL) {
-        return (NULL);
-    }
+	if (lastToken == NULL)
+	{
+		return (NULL);
+	}
 
-    token = lastToken + strspn(lastToken, delim);
+	token = lastToken + strspn(lastToken, delim);
 
-    if (*token == '\0') {
-        lastToken = NULL;
-        return (NULL);
-    }
+	if (*token == '\0')
+	{
+		lastToken = NULL;
+		return (NULL);
+	}
 
-    lastToken = token + strcspn(token, delim);
+	lastToken = token + strcspn(token, delim);
 
-    if (*lastToken != '\0') {
-        *lastToken = '\0';
-        lastToken++;
-    } else {
-        lastToken = (NULL);
-    }
+	if (*lastToken != '\0')
+	{
+		*lastToken = '\0';
+		lastToken++;
+	}
+	else
+	{
+		lastToken = (NULL);
+	}
 
-    return (token);
+	return (token);
 }
 
 
 /**
  * get_commands - Get the commands object
  * 
- * @command: user input as string. 
- * Return: char** type list of commands. 
+ * @command: user input as string.
+ * Return: char** type list of commands.
  */
 void get_commands(char *command, char ***commands)
 {
-    char *token = _strtok(command, " ");
-    int initial_capacity = 2;
-    int command_index = 0;
-    int current_capacity = initial_capacity;
+	char *token = _strtok(command, " ");
+	int initial_capacity = 2;
+	int command_index = 0;
+	int current_capacity = initial_capacity;
 
-    *commands = (char **)malloc(initial_capacity * sizeof(char *));
+	*commands = (char **)malloc(initial_capacity * sizeof(char *));
 
-    if (*commands == NULL) {
-        fprintf(stderr, "Memory allocation failed\n");
-        exit(EXIT_FAILURE);
-    }
+	if (*commands == NULL)
+	{
+		fprintf(stderr, "Memory allocation failed\n");
+		exit(EXIT_FAILURE);
+	}
 
-    while (token != NULL) {
-        if (command_index >= current_capacity - 1) {
-            /* Increase capacity using realloc */
-            current_capacity *= 2;
-            *commands = (char **)realloc(*commands, current_capacity * sizeof(char *));
-            
-            if (*commands == NULL) {
-                fprintf(stderr, "Memory reallocation failed\n");
-                exit(EXIT_FAILURE);
-            }
-        }
+	while (token != NULL)
+	{
+		if (command_index >= current_capacity - 1)
+		{
+			/* Increase capacity using realloc */
+			current_capacity *= 2;
+			*commands = (char **)realloc(*commands, current_capacity * sizeof(char *));
 
-        (*commands)[command_index] = strdup(token);
+			if (*commands == NULL)
+			{
+				fprintf(stderr, "Memory reallocation failed\n");
+				exit(EXIT_FAILURE);
+			}
+		}
 
-        if ((*commands)[command_index] == NULL) {
-            fprintf(stderr, "Memory allocation failed\n");
-            exit(EXIT_FAILURE);
-        }
+		(*commands)[command_index] = strdup(token);
 
-        token = _strtok(NULL, " "); /* Move to the next token */
-        command_index++;
-    }
+		if ((*commands)[command_index] == NULL)
+		{
+			fprintf(stderr, "Memory allocation failed\n");
+			exit(EXIT_FAILURE);
+		}
 
-    /* Add NULL as the last element in commands */
-    (*commands)[command_index] = NULL;
+		token = _strtok(NULL, " "); /* Move to the next token */
+		command_index++;
+	}
+
+	/* Add NULL as the last element in commands */
+	(*commands)[command_index] = NULL;
 }
