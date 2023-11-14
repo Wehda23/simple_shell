@@ -54,7 +54,7 @@ void add_env(char **commands, char *file)
 		}
 		else
 		{
-			printf("%d: Missing field, example setenv VARIABLE VALUE\n", file);
+			printf("%s: Missing field, example setenv VARIABLE VALUE\n", file);
 		}
 	}
 	else
@@ -89,7 +89,7 @@ void remove_env(char **commands, char *file)
 		}
 		else
 		{
-			printf("%d: Missing field, example setenv VARIABLE\n", file);
+			printf("%s: Missing field, example setenv VARIABLE\n", file);
 		}
 
 	}
