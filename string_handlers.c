@@ -9,13 +9,13 @@
  */
 int _strlen(char *string)
 {
-
 	int length = 0;
 
 	if (string == NULL)
 		return (0);
 
-	while (string[length++]);
+	while (string[length])
+			length++;
 
 	return (length - 1);
 }
@@ -26,7 +26,7 @@ int _strlen(char *string)
  * Return: integer value of the string number or 0 on error.
  */
 int _atoi(char *string)
-{   
+{
 	int value = 0;
 
 	/* Null string returns 0 */
@@ -55,7 +55,7 @@ int _atoi(char *string)
  * _strcmp - function that compares two strings
  * @first: First string input.
  * @second: Second string input.
- * Return: (1) in case strings are identical, (0) in case strings are not identical.
+ * Return: (1) in case strings are identical, (0) in case strings not =
  */
 int _strcmp(char *first, char *second)
 {

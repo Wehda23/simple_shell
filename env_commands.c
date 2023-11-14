@@ -41,7 +41,7 @@ void add_env(char **commands, char *file)
 	if (pid == -1)
 	{
 		perror(file);
-	} 
+	}
 	else if (pid == 0)
 	{
 		if (commands[1] != NULL && commands[2] != NULL)
@@ -76,7 +76,7 @@ void remove_env(char **commands, char *file)
 	if (pid == -1)
 	{
 		perror(file);
-	} 
+	}
 	else if (pid == 0)
 	{
 		if (commands[1] != NULL)

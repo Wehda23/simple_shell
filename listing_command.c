@@ -10,6 +10,7 @@ void ls_command(char **commands, char *file)
 {
 	pid_t pid = fork();
 	int status;
+
 	if (pid == -1)
 	{
 		perror(file);
@@ -36,6 +37,7 @@ void echo_command(char **commands, char *file)
 {
 	pid_t pid = fork();
 	int status;
+
 	if (pid == -1)
 	{
 		perror(file);
@@ -43,6 +45,7 @@ void echo_command(char **commands, char *file)
 	else if (pid == 0)
 	{
 		int i = 1;
+        
 		if (commands[1] != NULL)
 		{
 			while (commands[i] != NULL)
@@ -85,7 +88,8 @@ void exit_command(char **commands)
 {
 	if (commands[1] != NULL)
 	{
-		int exit_status = atoi(commands[1]);
+		int exit_status = _atoi(commands[1]);
+
 		exit(exit_status);
 	}
 	else

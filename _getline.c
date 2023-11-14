@@ -3,13 +3,13 @@
 
 /**
  * _getline - function that takes user input.
- * 
  * @fd: File descriptor.
  * @buf: buffer at which it stores the input.
  * @count: read up count in integers.
- * @return int
+ * Return: integer indicating length of command.
  */
-int _getline(int fd, void *buf, int count) {
+int _getline(int fd, void *buf, int count)
+{
 	char c, *buffer = (char *)buf;
 	int  index, read_character, hashtage_position = -1;
 

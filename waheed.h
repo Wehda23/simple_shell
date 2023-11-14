@@ -14,7 +14,7 @@
 extern char **environ;
 
 /* prompt.c */
-void prompt();
+void prompt(void);
 
 /* listing_command.c */
 void ls_command(char **command, char *file);
