@@ -58,4 +58,17 @@ void echo_command(char **commands, char *file)
     }
 }
 
-
+/**
+ * exit_command - Exit shell
+ * @commands: command pass in to the function
+ * @file: execution file name.
+ */
+void exit_command(char **commands)
+{
+    if (commands[1] != NULL) {
+        int exit_status = atoi(commands[1]);
+        exit(exit_status);
+    } else {
+        exit(EXIT_SUCCESS);
+    }
+}

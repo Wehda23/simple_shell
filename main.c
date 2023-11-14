@@ -33,7 +33,7 @@ int main(__attribute__((unused)) int argc, char **argv)
             else if (_strcmp(cmd[0], "alias") == 0)
                 exit(EXIT_SUCCESS);
             else if (_strcmp(cmd[0], "exit") == 0)
-                exit(EXIT_SUCCESS);
+                exit_command(cmd);
             else
                 printf("%s: %s: command not found\n", argv[0], cmd[0]);
             free_commands(&cmd);
