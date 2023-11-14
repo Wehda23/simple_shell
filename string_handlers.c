@@ -15,7 +15,9 @@ int _strlen(char *string)
 		return (0);
 
 	while (string[length])
-			length++;
+	{
+		length++;
+	}
 
 	return (length - 1);
 }
