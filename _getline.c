@@ -13,7 +13,6 @@ int _getline(int fd, void *buf, int count)
 	char c, *buffer = (char *)buf;
 	int  index, read_character, hashtage_position = -1;
 
-	/* Basically telling it if it counters EOF of ENTER it breaks the loop*/
 	for (index = 0; c != EOF && c != '\n' && index < count; index++)
 	{
 		fflush(stdin);
@@ -26,28 +25,23 @@ int _getline(int fd, void *buf, int count)
 		{
 			perror("hsh");
 			exit(EXIT_FAILURE);
-		}
-		else
-		{   /* Remove any preceeding whitespaces */
+		} else
+		{
 			if (index == 0 && c == ' ')
 				index--;
 			else
 				buffer[index] = c;
 		}
 
-		/* Handle Hastage */
 		if (c == '#')
-		{
 			hashtage_position = index;
-		}
 	}
 	index--;
 	if (hashtage_position == -1)
 	{
 		buffer[index] = '\0';
 		index == 0 ? index : index--;
-	}
-	else
+	} else
 	{
 		buffer[hashtage_position] = '\0';
 		index = hashtage_position;
