@@ -49,3 +49,28 @@ int _atoi(char *string)
 
     return (value);
 }
+
+
+/**
+ * _strcmp - function that compares two strings
+ * @first: First string input.
+ * @second: Second string input.
+ * Return: (1) in case strings are identical, (0) in case strings are not identical.
+ */
+int _strcmp(char *first, char *second)
+{
+    while (*first != '\0' && *second != '\0') {
+        if (*first != *second) {
+            return (1);
+        }
+
+        first++;
+        second++;
+    }
+    if (*first != '\0' || *second != '\0') {
+        return (1);
+    }
+
+    return (0);
+}
+

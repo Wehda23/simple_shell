@@ -10,14 +10,14 @@
  * @return int 
  */
 int _getline(int fd, void *buf, int count) {
-    char character, *buffer = (char *)buf;
-    int  index, read_character;
+    char c, *buffer = (char *)buf;
+    int  index, read_character, hashtage_position = -1;
 
     /* Basically telling it if it counters EOF of ENTER it breaks the loop*/
-    for (index = 0; character  != EOF && character != '\n' && index < count; index++)
+    for (index = 0; c != EOF && c != '\n' && index < count; index++)
     {
         fflush(stdin);
-        read_character = read(fd, &character, 1);
+        read_character = read(fd, &c, 1);
         if (read_character == 0)
         {
             exit(EXIT_SUCCESS);
@@ -27,10 +27,30 @@ int _getline(int fd, void *buf, int count) {
             exit(EXIT_FAILURE);
         }
         else
-            buffer[index] = character;
+        {   /* Remove any preceeding whitespaces */
+            if (index == 0 && c == ' ')
+                index--;
+            else
+                buffer[index] = c;
+        }
+            
+        /* Handle Hastage */
+        if (c == '#')
+        {
+            hashtage_position = index;
+        }
     }
-
-    buffer[index] = '\0';
-
-    return (index - 1);
+    index--;
+    if (hashtage_position == -1)
+    {
+        buffer[index] = '\0';
+        index == 0 ? index : index--;
+    }
+    else
+    {
+        buffer[hashtage_position] = '\0';
+        index = hashtage_position;
+    }
+    
+    return (index);
 }
