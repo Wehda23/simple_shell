@@ -27,7 +27,11 @@ int main(__attribute__((unused)) int argc, char **argv)
             else if (_strcmp(cmd[0], "cd") == 0)
                 printf("Im changing directory\n");
             else if (_strcmp(cmd[0], "env") == 0) 
-                printf("Im displaying environment variables\n");
+                print_env(argv[0]);
+            else if (_strcmp(cmd[0], "setenv") == 0) 
+                printf("Im setenv VARIABLE VALUE\n");
+            else if (_strcmp(cmd[0], "unsetenv") == 0) 
+                printf("Im unsetenv VARIABLE\n");
             else if (_strcmp(cmd[0], "ls") == 0 || strcmp(cmd[0], "/bin/ls") == 0)
                 ls_command(cmd, argv[0]);
             else if (_strcmp(cmd[0], "alias") == 0)

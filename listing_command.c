@@ -10,13 +10,19 @@ void ls_command(char **commands, char *file)
 {
     pid_t pid = fork();
     int status;
-    if (pid == -1) {
+    if (pid == -1)
+    {
         perror(file);
-    } else if (pid == 0) {
-        if (execve("/bin/ls", commands, NULL) == -1) {
+    } 
+    else if (pid == 0)
+    {
+        if (execve("/bin/ls", commands, NULL) == -1)
+        {
             perror(file);
         }
-    } else {
+    }
+    else
+    {
         waitpid(pid, &status, 0);
     }
 }
@@ -30,21 +36,32 @@ void echo_command(char **commands, char *file)
 {
     pid_t pid = fork();
     int status;
-    if (pid == -1) {
+    if (pid == -1)
+    {
         perror(file);
-    } else if (pid == 0) {
+    } 
+    else if (pid == 0)
+    {
         int i = 1;
-        if (commands[1] != NULL) {
-            while (commands[i] != NULL) {
-                if (strcmp(commands[i], "$$") == 0) {
+        if (commands[1] != NULL)
+        {
+            while (commands[i] != NULL)
+            {
+                if (strcmp(commands[i], "$$") == 0)
+                {
                     printf("%d", getpid());
-                } else if (strcmp(commands[i], "$?") == 0) {
+                }
+                else if (strcmp(commands[i], "$?") == 0)
+                {
                     printf("%d", WEXITSTATUS(status));
-                } else {
+                }
+                else
+                {
                     printf("%s", commands[i]);
                 }
 
-                if (commands[i + 1] != NULL) {
+                if (commands[i + 1] != NULL)
+                {
                     printf(" ");
                 }
                 i++;
@@ -53,7 +70,9 @@ void echo_command(char **commands, char *file)
         printf("\n");
 
         exit(EXIT_SUCCESS);
-    } else {
+    }
+    else
+    {
         waitpid(pid, &status, 0);
     }
 }
@@ -65,10 +84,13 @@ void echo_command(char **commands, char *file)
  */
 void exit_command(char **commands)
 {
-    if (commands[1] != NULL) {
+    if (commands[1] != NULL)
+    {
         int exit_status = atoi(commands[1]);
         exit(exit_status);
-    } else {
+    }
+    else
+    {
         exit(EXIT_SUCCESS);
     }
 }

@@ -15,10 +15,14 @@ extern char **environ;
 
 /* prompt.c */
 void prompt();
+
 /* listing_command.c */
 void ls_command(char **command, char *file);
 void echo_command(char **commands, char *file);
 void exit_command(char **commands);
+
+/* env_commands.c */
+void print_env(char *file);
 
 /* _getline.c */
 int _getline(int fd, void *buf, int count);
