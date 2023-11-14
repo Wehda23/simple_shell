@@ -7,8 +7,15 @@
  */
 void ls_command(char **commands, char *file)
 {
-    if (execve("/bin/ls", commands, NULL) == -1)
-    {
+    pid_t pid = fork(); // Create a new process
+    int status;
+    if (pid == -1) {
         perror(file);
+    } else if (pid == 0) {
+        if (execve("/bin/ls", commands, NULL) == -1) {
+            perror(file);
+        }
+    } else {
+        waitpid(pid, &status, 0);
     }
 }

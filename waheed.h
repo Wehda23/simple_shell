@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h> 
+#include <sys/wait.h>
+#include <errno.h>
 
 /* Predefined constants */
 #define COMMAND_BUFFER_SIZE 1024
