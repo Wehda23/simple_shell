@@ -17,7 +17,7 @@ void ls_command(char **commands, char *file)
 	}
 	else if (pid == 0)
 	{
-		if (execve("/bin/ls", commands, NULL) == -1)
+		if (execve(*commands, commands, environ) == -1)
 		{
 			perror(file);
 		}
