@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <string.h> 
+#include <string.h>
 #include <sys/wait.h>
 #include <errno.h>
 
@@ -30,7 +30,7 @@ void remove_env(char **commands, char *file);
 int _getline(int fd, void *buf, int count);
 
 /* _strtok.c */
-char * _strtok(char *command, char *delim);
+char *_strtok(char *command, char *delim);
 void get_commands(char *command, char ***commands);
 
 /* string_handlers.c */
