@@ -6,7 +6,7 @@
  * @file: file name of shell.
  * Return: 0 in case of success else failure.
  */
-int execute_command(char **cmd, char *file)
+int execute_command(char **cmd, char **semicmd, char *file)
 {
 	int status;
 	pid_t pid;
@@ -27,6 +27,7 @@ int execute_command(char **cmd, char *file)
 		{
 			errprint(cmd[0]);
 			free_cmd_result(&cmd);
+            free_semicolon_memory(&semicolon);
 			exit(127);
 		}
 		if (execve(*cmd, cmd, environ) == -1)

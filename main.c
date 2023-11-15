@@ -16,6 +16,7 @@ int main(__attribute__((unused)) int argc, char **argv)
 		prompt();
 		read_input = getUserInput();
 		semicolon_cmd = semicolon_parser(read_input);
+        free(read_input);
 
 		while (semicolon_cmd[semi_colon_count])
 		{
@@ -33,7 +34,7 @@ int main(__attribute__((unused)) int argc, char **argv)
 			}
 			else
 			{
-				status = execute_command(cmd, argv[0]);
+				status = execute_command(cmd, semicolon_cmd, argv[0]);
 			}
 			free_cmd_result(&cmd);
 		}
