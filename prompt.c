@@ -1,8 +1,12 @@
-#include "biggestheart.h"
+#include "waheed.h"
+
+
 /**
- * prompt - function that prints '$' to standard output
+ * prompt - is a function that prints ($) prompt
+ * Return: void
  */
 void prompt(void)
 {
-	PRINT("$ ");
+	printf("$ ");
+	fflush(stdout);
 }
