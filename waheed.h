@@ -33,7 +33,7 @@ int exit_check(char *string);
 int buildin_checks(char *string);
 
 /* execute_commands.c */
-void execute_command(char **cmd, char *file);
+int execute_command(char **cmd, char *file);
 int execute_echo(char **cmd);
 
 /* semi_colon_parser.c */
