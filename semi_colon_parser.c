@@ -43,26 +43,26 @@ char **semicolon_parser(char *input)
     char **commands = (char **)malloc(bufsize * sizeof(char *));
     char *token = strtok(input, ";");
     
-    if (!commands) 
+    if (!commands)
     {
         errprint("Memory allocation error\n");
         exit(EXIT_FAILURE);
     }
 
-    while (token != NULL) 
+    while (token != NULL)
     {
-        if (index >= bufsize - 1) 
+        if (index >= bufsize - 1)
         {
             bufsize += BUFFER;
             commands = (char **)realloc(commands, bufsize * sizeof(char *));
-            if (!commands) 
+            if (!commands)
             {
                 errprint("Memory reallocation error\n");
                 exit(EXIT_FAILURE);
             }
         }
 
-        token = remove_surrounding_spaces(token); 
+        token = remove_surrounding_spaces(token);
         commands[index++] = my_strdup(token);
         token = strtok(NULL, ";");
     }
@@ -81,10 +81,9 @@ void free_semicolon_memory(char ***commands)
     int i;
     char **temp = *commands;
 
-    if (commands != NULL && *commands != NULL) 
+    if (commands != NULL && *commands != NULL)
     {
-        
-        for (i = 0; temp[i] != NULL; i++) 
+        for (i = 0; temp[i] != NULL; i++)
         {
             free(temp[i]);
         }

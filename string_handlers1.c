@@ -84,17 +84,17 @@ int _strcmp(char *first, char *second)
  * Return: Pointer to the newly allocated duplicated string,
  *         or NULL if insufficient memory was available.
  */
-char *my_strdup(const char *str) 
+char *my_strdup(const char *str)
 {
-    size_t len = strlen(str) + 1;
-    char *duplicate = (char *)malloc(len * sizeof(char));
+	size_t len = strlen(str) + 1;
+	char *duplicate = (char *)malloc(len * sizeof(char));
 
-    if (duplicate != NULL)
+	if (duplicate != NULL)
 	{
-        memcpy(duplicate, str, len);
-    }
+		memcpy(duplicate, str, len);
+	}
 
-    return (duplicate);
+	return (duplicate);
 }
 
 /**
@@ -107,19 +107,19 @@ char *my_strdup(const char *str)
  */
 int _strncmp(const char *first, const char *second, size_t num)
 {
-    while (num > 0 && *first && *second && *first == *second)
+	while (num > 0 && *first && *second && *first == *second)
 	{
-        first++;
-        second++;
-        num--;
-    }
+		first++;
+		second++;
+		num--;
+	}
 
-    if (num == 0)
+	if (num == 0)
 	{
-        return 0;
-    }
+		return 0;
+	}
 	else
 	{
-        return (*(unsigned char *)first - *(unsigned char *)second);
-    }
+		return (*(unsigned char *)first - *(unsigned char *)second);
+	}
 }

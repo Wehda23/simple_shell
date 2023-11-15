@@ -4,9 +4,9 @@
  * cmd_parser - function that is used to parse command.
  * @input: string input.
  * @delim: delimiter according to which the commands are going to be parsed.
- * Return: an array of parsed/semi parsed command. 
+ * Return: an array of parsed/semi parsed command.
  */
-char **cmd_parser(char *input, char *delim) 
+char **cmd_parser(char *input, char *delim)
 {
     int bufsize = 64;
     int index = 0;
@@ -15,22 +15,22 @@ char **cmd_parser(char *input, char *delim)
     char *input_replaced = replace_space_within_quotes(input, replacement);
     char *token = _strtok(input_replaced, delim);
 
-    if (!commands) 
+    if (!commands)
     {
         errprint("Memory allocation error\n");
         exit(EXIT_FAILURE);
     }
 
-    while (token != NULL) 
+    while (token != NULL)
     {
         commands[index] = my_strdup(token);
         index++;
 
-        if (index >= bufsize) 
+        if (index >= bufsize)
         {
             bufsize += 64;
             commands = (char **)realloc(commands, bufsize * sizeof(char *));
-            if (!commands) 
+            if (!commands)
             {
                 errprint("Memory reallocation error\n");
                 exit(EXIT_FAILURE);
@@ -51,14 +51,12 @@ char **cmd_parser(char *input, char *delim)
  * @result: array of commands.
  */
 void free_cmd_result(char ***result)
-{   
+{
     char **temp = *result;
     int i = 0;
 
-    if (result != NULL && *result != NULL) 
+    if (result != NULL && *result != NULL)
     {
-        
-
         while (temp[i] != NULL)
         {
             free(temp[i]);

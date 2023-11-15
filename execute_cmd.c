@@ -1,14 +1,14 @@
 #include "waheed.h"
 
 /**
- * execute_command - execute shell commands. 
+ * execute_command - execute shell commands.
  * @cmd: command lines.
  * @file: file name of shell.
  * Return: 0 in case of success else failure.
  */
 int execute_command(char **cmd, char *file)
 {
-    int status;
+	int status;
 	pid_t pid;
 
 	if (*cmd == NULL)
@@ -21,7 +21,7 @@ int execute_command(char **cmd, char *file)
 	}
 	if (pid == 0)
 	{
-        if (_strncmp(*cmd, "./", 2) != 0 && _strncmp(*cmd, "/", 1) != 0)
+		if (_strncmp(*cmd, "./", 2) != 0 && _strncmp(*cmd, "/", 1) != 0)
 			cmd_finder(cmd);
 		if (access(cmd[0], R_OK) != 0)
 		{
@@ -61,10 +61,10 @@ int execute_echo(char **cmd)
 	pid = fork();
 	if (pid == 0)
 	{
-	if (execve("/bin/echo", cmd, environ) == -1)
-	{
-		return (-1);
-	}
+		if (execve("/bin/echo", cmd, environ) == -1)
+		{
+			return (-1);
+		}
 		exit(EXIT_FAILURE);
 	}
 	else if (pid < 0)

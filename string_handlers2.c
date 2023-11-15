@@ -8,21 +8,21 @@
  */
 char *_strcat(char *dest, const char *src)
 {
-    char *original_dest = dest;
+	char *original_dest = dest;
 
-    while (*dest)
-    {
-        dest++;
-    }
+	while (*dest)
+	{
+		dest++;
+	}
 
-    while (*src)
-    {
-        *dest = *src;
-        dest++;
-        src++;
-    }
+	while (*src)
+	{
+		*dest = *src;
+		dest++;
+		src++;
+	}
 
-    *dest = '\0';
+	*dest = '\0';
 
-    return original_dest;
+	return (original_dest);
 }
