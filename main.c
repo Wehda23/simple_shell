@@ -13,7 +13,8 @@ int main(__attribute__((unused)) int argc, char **argv)
 
 	while (1)
 	{
-		prompt();
+		if (isatty(STDIN_FILENO))
+			prompt();
 		read_input = getUserInput();
 		semicolon_cmd = semicolon_parser(read_input);
 		free(read_input);
