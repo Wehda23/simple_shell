@@ -107,7 +107,7 @@ char *my_strdup(const char *str)
  */
 int _strncmp(const char *first, const char *second, size_t num)
 {
-    while (n > 0 && *first && *second && *first == *second)
+    while (num > 0 && *first && *second && *first == *second)
 	{
         first++;
         second++;

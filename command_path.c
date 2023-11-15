@@ -14,10 +14,10 @@ int cmd_finder(char **cmd)
 	value = _strtok(path, ":");
 	while (value != NULL)
 	{
-		cmd_path = build(*cmd, value);
+		cmd_path = build_path(*cmd, value);
 		if (stat(cmd_path, &buf) == 0)
 		{
-			*cmd = _strdup(cmd_path);
+			*cmd = my_strdup(cmd_path);
 			free(cmd_path);
 			free(path);
 			return (0);

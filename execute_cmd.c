@@ -22,7 +22,7 @@ int execute_command(char **cmd, char *file)
 	if (pid == 0)
 	{
         if (_strncmp(*cmd, "./", 2) != 0 && _strncmp(*cmd, "/", 1) != 0)
-			path_cmd(cmd);
+			cmd_finder(cmd);
 		if (access(cmd[0], R_OK) != 0)
 		{
 			errprint(cmd[0]);
