@@ -23,6 +23,7 @@ char *getUserInput()
         
         if (readStatus == 0) 
         {
+            cprint("\nlogout\n");
             free(inputBuffer);
             exit(EXIT_SUCCESS);
         }
