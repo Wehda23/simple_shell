@@ -72,7 +72,7 @@ char *my_strdup(const char *str);
 int _strncmp(const char *first, const char *second, size_t n);
 
 /* enviromental_cmd.c */
-void print_env(char *file);
+void print_env(void);
 
 /* string_handers2.c */
 char *_strcat(char *dest, const char *src);

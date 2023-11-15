@@ -29,7 +29,7 @@ int main(__attribute__((unused)) int argc, char **argv)
 			}
 			else if (buildin_checks(cmd[0]) == 0)
 			{
-				print_env(argv[0]);
+				print_env();
 			}
 			else
 			{

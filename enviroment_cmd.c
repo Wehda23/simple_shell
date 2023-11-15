@@ -4,7 +4,7 @@
  * print_env - function that prints enviromental variables.
  * @file: execution file name.
  */
-void print_env(char *file)
+void print_env(void)
 {
 	char **env;
 
