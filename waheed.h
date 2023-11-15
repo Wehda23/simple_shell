@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 /* constants */
 
@@ -24,6 +26,10 @@ char *remove_semicolon(char *str);
 
 /* checkers.c */
 int exit_check(char *string);
+int buildin_checks(char *string);
+
+/* execute_commands.c */
+void execute_command(char **cmd, char *file);
 
 /* semi_colon_parser.c */
 char *remove_surrounding_spaces(char *str);
@@ -39,6 +45,9 @@ char **cmd_parser(char *input, char *delim);
 void free_cmd_result(char ***result);
 char *replace_space_within_quotes(char *input, char replacement);
 void revert_replacement_to_spaces(char ***commands, char replacement);
+
+/* exit_command.c */
+void exit_command(void);
 
 /* printers.c */
 void cprint(char *string);

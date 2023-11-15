@@ -21,13 +21,18 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv)
             cmd = cmd_parser(semicolon_cmd[semi_colon_count++], " ");
             if (exit_check(cmd[0]) == 0)
             {
-                cprint("exiting program ");
+                free_cmd_result(&cmd);
+                free_semicolon_memory(&semicolon_cmd);
+                exit_command();
+            }
+            else if (buildin_checks(cmd[0]) == 0)
+            {
+                cprint("executing command: ");
+                cprint(cmd[0]);
             }
             else
             {
-                print_commands(cmd);
-                cprint("Command is: ");
-                cprint(cmd[0]);
+                execute_command(cmd, argv[0]);
             }
             cprint("\n");
             free_cmd_result(&cmd);
