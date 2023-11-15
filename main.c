@@ -25,6 +25,7 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv)
             index++;
         }
         free_cmd_result(&cmd);
+        index = 0;
     }
     return (0);
 }

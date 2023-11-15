@@ -50,6 +50,7 @@ char *getUserInput()
 
     inputBuffer[index] = '\0';
     processedInput = removeLeadingSpaces(inputBuffer);
+    processedInput = remove_semicolon(processedInput);
     free(inputBuffer);
 
     handleHashtag(processedInput);

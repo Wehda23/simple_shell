@@ -10,6 +10,7 @@
 /* constants */
 
 #define BUFFER 1024
+extern char **environ;
 
 /* prompt.c */
 void prompt(void);
