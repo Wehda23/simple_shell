@@ -26,7 +26,7 @@ int execute_command(char **cmd, char *file)
 		if (access(cmd[0], R_OK) != 0)
 		{
 			errprint(cmd[0]);
-			free_cmd_result(cmd);
+			free_cmd_result(&cmd);
 			exit(127);
 		}
 		if (execve(*cmd, cmd, environ) == -1)

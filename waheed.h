@@ -59,6 +59,11 @@ void cprint(char *string);
 void errprint(char *string);
 void print_commands(char **commands);
 
+/* command_path.c */
+char *_getenv(char *name);
+char *build_path(char *token, char *value);
+int cmd_finder(char **cmd);
+
 /* string_handers1.c */
 int _strlen(char *string);
 int _strcmp(char *first, char *second);
