@@ -19,7 +19,6 @@ int _getline(int fd, void *buf, int count)
 		read_character = read(fd, &c, 1);
 		if (read_character == 0)
 		{
-			printf("\n");
 			exit(EXIT_SUCCESS);
 		} else if (read_character == -1)
 		{
