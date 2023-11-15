@@ -8,7 +8,7 @@
 int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv)
 {
     char *read_input, **cmd, **semicolon_cmd;
-    int semi_colon_count = 0;
+    int semi_colon_count = 0, status = 0;
 
     while (1)
     {
@@ -32,13 +32,14 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv)
             }
             else
             {
-                execute_command(cmd, argv[0]);
+                status = execute_command(cmd, argv[0]);
             }
             cprint("\n");
             free_cmd_result(&cmd);
         }
         semi_colon_count = 0;
         free_semicolon_memory(&semicolon_cmd);
+        wait(&status);
     }
     return (0);
 }

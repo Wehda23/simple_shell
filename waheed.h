@@ -8,6 +8,10 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <linux/limits.h>
 
 /* constants */
 
@@ -30,6 +34,7 @@ int buildin_checks(char *string);
 
 /* execute_commands.c */
 void execute_command(char **cmd, char *file);
+int execute_echo(char **cmd);
 
 /* semi_colon_parser.c */
 char *remove_surrounding_spaces(char *str);
