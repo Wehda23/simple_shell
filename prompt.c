@@ -7,6 +7,6 @@
  */
 void prompt(void)
 {
-	printf("\n$ ");
+	printf("$ ");
 	fflush(stdout);
 }
