@@ -24,7 +24,7 @@ int exit_check(char *string)
 /**
  * buildin_checks - function matches string with builtin commands.
  * @string: the string to be compared to builtin commands.
- * Return: 0 in case of success, 1 in case of failure. 
+ * Return: 0 in case of success, 1 in case of failure.
  */
 int buildin_checks(char *string)
 {

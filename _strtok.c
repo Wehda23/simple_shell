@@ -30,8 +30,8 @@ unsigned int check_delim(char c, const char *str)
  */
 char *_strtok(char *str, const char *delim)
 {
-	static char *token = NULL;
-	static char *next_token = NULL;
+	static char *token;
+	static char *next_token;
 
 	if (str != NULL)
 		next_token = str;

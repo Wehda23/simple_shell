@@ -1,8 +1,9 @@
 #include "waheed.h"
 
-
 /**
  * main - Entry function for simple shell
+ * @argc: number of arguemetns entered.
+ * @argv: arguements entered.
  * Return: 0 in case of success otherwise 1 in case of failure.
  */
 int main(__attribute__((unused)) int argc, char **argv)

@@ -1,34 +1,34 @@
 #include "waheed.h"
 
 /**
- * remove_surrounding_spaces - Removes both preceding and trailing spaces in a string.
+ * remove_surrounding_spaces - Removes both preceding and trailing spaces.
  * @str: Input string.
  * Return: Pointer to the modified string.
  */
 char *remove_surrounding_spaces(char *str)
 {
-    int i, j = 0, len = strlen(str);
+	int i, j = 0, len = strlen(str);
 
-    while (str[j] == ' ' || str[j] == '\t')
-    {
-        j++;
-    }
+	while (str[j] == ' ' || str[j] == '\t')
+	{
+		j++;
+	}
 
-    for (i = 0; str[i + j] != '\0'; i++)
-    {
-        str[i] = str[i + j];
-    }
+	for (i = 0; str[i + j] != '\0'; i++)
+	{
+		str[i] = str[i + j];
+	}
 
-    len -= j;
+	len -= j;
 
-    while (len > 0 && (str[len - 1] == ' ' || str[len - 1] == '\t'))
-    {
-        len--;
-    }
+	while (len > 0 && (str[len - 1] == ' ' || str[len - 1] == '\t'))
+	{
+		len--;
+	}
 
-    str[len] = '\0';
+	str[len] = '\0';
 
-    return (str);
+	return (str);
 }
 
 /**
@@ -38,37 +38,37 @@ char *remove_surrounding_spaces(char *str)
  */
 char **semicolon_parser(char *input)
 {
-    int bufsize = BUFFER;
-    int index = 0;
-    char **commands = (char **)malloc(bufsize * sizeof(char *));
-    char *token = strtok(input, ";");
-    
-    if (!commands)
-    {
-        errprint("Memory allocation error\n");
-        exit(EXIT_FAILURE);
-    }
+	int bufsize = BUFFER;
+	int index = 0;
+	char **commands = (char **)malloc(bufsize * sizeof(char *));
+	char *token = strtok(input, ";");
 
-    while (token != NULL)
-    {
-        if (index >= bufsize - 1)
-        {
-            bufsize += BUFFER;
-            commands = (char **)realloc(commands, bufsize * sizeof(char *));
-            if (!commands)
-            {
-                errprint("Memory reallocation error\n");
-                exit(EXIT_FAILURE);
-            }
-        }
+	if (!commands)
+	{
+		errprint("Memory allocation error\n");
+		exit(EXIT_FAILURE);
+	}
 
-        token = remove_surrounding_spaces(token);
-        commands[index++] = my_strdup(token);
-        token = strtok(NULL, ";");
-    }
-    commands[index] = NULL;
+	while (token != NULL)
+	{
+		if (index >= bufsize - 1)
+		{
+			bufsize += BUFFER;
+			commands = (char **)realloc(commands, bufsize * sizeof(char *));
+			if (!commands)
+			{
+				errprint("Memory reallocation error\n");
+				exit(EXIT_FAILURE);
+			}
+		}
 
-    return (commands);
+		token = remove_surrounding_spaces(token);
+		commands[index++] = my_strdup(token);
+		token = strtok(NULL, ";");
+	}
+	commands[index] = NULL;
+
+	return (commands);
 }
 
 /**
@@ -78,16 +78,16 @@ char **semicolon_parser(char *input)
  */
 void free_semicolon_memory(char ***commands)
 {
-    int i;
-    char **temp = *commands;
+	int i;
+	char **temp = *commands;
 
-    if (commands != NULL && *commands != NULL)
-    {
-        for (i = 0; temp[i] != NULL; i++)
-        {
-            free(temp[i]);
-        }
-        free(temp);
-        *commands = NULL;
-    }
+	if (commands != NULL && *commands != NULL)
+	{
+		for (i = 0; temp[i] != NULL; i++)
+		{
+			free(temp[i]);
+		}
+		free(temp);
+		*commands = NULL;
+	}
 }

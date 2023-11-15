@@ -144,7 +144,7 @@ char *remove_semicolon(char *str)
 		return (NULL);
 	}
 
-	while (str[i] != '\0') 
+	while (str[i] != '\0')
 	{
 		buff[j] = str[i];
 		i++;
