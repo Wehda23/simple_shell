@@ -14,15 +14,17 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv)
     {
         prompt();
         read_input = getUserInput();
+        cprint("You entered: ");
+        cprint(read_input);
         cmd = cmd_parser(read_input, " ");
-
+        cprint("\n");
         while (cmd[index] != NULL)
         {
             cprint(cmd[index]);
             cprint("\n");
             index++;
         }
-        free_cmd_result(cmd);
+        free_cmd_result(&cmd);
     }
     return (0);
 }

@@ -1,7 +1,6 @@
 #include "waheed.h"
 
 
-
 /**
  * _strlen - function used to return the length of a string.
  * @string: string that we are going get the length of.
@@ -88,7 +87,6 @@ int _strcmp(char *first, char *second)
 char *my_strdup(const char *str) 
 {
     size_t len = strlen(str) + 1;
-
     char *duplicate = (char *)malloc(len * sizeof(char));
 
     if (duplicate != NULL)

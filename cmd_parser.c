@@ -21,7 +21,7 @@ char **cmd_parser(char *input, char *delim)
 
     while (token != NULL) 
     {
-        commands[index] = _strdup(token);
+        commands[index] = my_strdup(token);
         index++;
 
         if (index >= bufsize) 
@@ -43,17 +43,25 @@ char **cmd_parser(char *input, char *delim)
 }
 
 /**
- * free_cmd_result - frees memory allocated by cmd_parser 
+ * free_cmd_result - frees memory allocated by cmd_parser
+ * @result: array of commands.
  */
-void free_cmd_result(char **result)
-{
+void free_cmd_result(char ***result)
+{   
+    char **temp = *result;
     int i = 0;
 
-    while (result[i] != NULL)
+    if (result != NULL && *result != NULL) 
     {
-        free(result[i]);
-        i++;
-    }
+        
 
-    free(result);
+        while (temp[i] != NULL)
+        {
+            free(temp[i]);
+            i++;
+        }
+
+        free(temp);
+        *result = NULL;
+    }
 }

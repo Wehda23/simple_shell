@@ -63,7 +63,7 @@ char **semicolon_parser(char *input)
         }
 
         token = remove_surrounding_spaces(token); 
-        commands[index++] = strdup(token);
+        commands[index++] = my_strdup(token);
         token = strtok(NULL, ";&");
     }
     commands[index] = NULL;
@@ -76,16 +76,19 @@ char **semicolon_parser(char *input)
  *          for commands parsed by semicolon_parser.
  * @commands: Pointer to the array of parsed commands.
  */
-void free_semicolon_memory(char **commands)
+void free_semicolon_memory(char ***commands)
 {
     int i;
+    char **temp = *commands;
 
-    if (commands != NULL) 
+    if (commands != NULL && *commands != NULL) 
     {
-        for (i = 0; commands[i] != NULL; i++) 
+        
+        for (i = 0; temp[i] != NULL; i++) 
         {
-            free(commands[i]);
+            free(temp[i]);
         }
-        free(commands);
+        free(temp);
+        *commands = NULL;
     }
 }

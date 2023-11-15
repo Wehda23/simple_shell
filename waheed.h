@@ -24,7 +24,7 @@ char *remove_semicolon(char *str);
 /* semi_colon_parser.c */
 char *remove_surrounding_spaces(char *str);
 char **semicolon_parser(char *input);
-void free_semicolon_memory(char **commands);
+void free_semicolon_memory(char ***commands);
 
 /* _strtok.c */
 unsigned int check_delim(char c, const char *str);
@@ -32,7 +32,7 @@ char *_strtok(char *str, const char *delim);
 
 /* cmd_parser.c */
 char **cmd_parser(char *input, char *delim);
-void free_cmd_result(char **result);
+void free_cmd_result(char ***result);
 
 /* printers.c */
 void cprint(char *string);
