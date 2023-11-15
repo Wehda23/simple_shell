@@ -1,51 +1,103 @@
-#include "waheed.h"
-
-
+#include "biggestheart.h"
 /**
- * _getline - function that takes user input.
- * @fd: File descriptor.
- * @buf: buffer at which it stores the input.
- * @count: read up count in integers.
- * Return: integer indicating length of command.
- */
-int _getline(int fd, void *buf, int count)
+* _getline - read input from standard input by user
+* Return: the input on a buffer
+*/
+char *_getline()
 {
-	char c, *buffer = (char *)buf;
-	int  index, read_character, hashtage_position = -1;
+	int i, rd, buffsize = BUFSIZE;
+	char c = 0, *buffer, *buf;
 
-	for (index = 0; c != EOF && c != '\n' && index < count; index++)
+	buffer = malloc(buffsize);
+	if (buffer == NULL)
+	{
+		free(buffer);
+		return (NULL);
+	}
+	for (i = 0; c != EOF && c != '\n'; i++)
 	{
 		fflush(stdin);
-		read_character = read(fd, &c, 1);
-		if (read_character == 0)
+		rd = read(STDIN_FILENO, &c, 1);
+		if (rd == 0)
 		{
-			printf("\n");
+			free(buffer);
 			exit(EXIT_SUCCESS);
-		} else if (read_character == -1)
-		{
-			perror("hsh");
-			exit(EXIT_FAILURE);
-		} else
-		{
-			if (index == 0 && c == ' ')
-				index--;
-			else
-				buffer[index] = c;
 		}
-
-		if (c == '#')
-			hashtage_position = index;
+		buffer[i] = c;
+		if (buffer[0] == '\n')
+			return (enter(buffer));
+		if (i >= buffsize)
+		{
+			buffer = realloc(buffer, (buffsize + 2));
+			if (buffer == NULL)
+			{
+				free(buffer);
+				return (NULL);
+			}
+		}
 	}
-	index--;
-	if (hashtage_position == -1)
-	{
-		buffer[index] = '\0';
-		index == 0 ? index : index--;
-	} else
-	{
-		buffer[hashtage_position] = '\0';
-		index = hashtage_position;
-	}
+	buffer[i] = '\0';
+	buf = space(buffer);
+	free(buffer);
+	hashtag_handler(buf);
+	return (buf);
+}
+/**
+ * enter - Handles newline character input
+ * @string: String to be handled
+ * Return: Empty string
+ */
+char *enter(char *string)
+{
+	free(string);
+	return ("\0");
+}
 
-	return (index);
+/**
+ * space - Modifies the input string to remove preceeding whitespaces
+ * @str: Input to be modifies
+ * Return: Returns the modified string
+ */
+char *space(char *str)
+{
+	int i, j = 0;
+	char *buff;
+
+	buff = malloc(sizeof(char) * (_strlen(str) + 1));
+	if (buff == NULL)
+	{
+		free(buff);
+		return (NULL);
+	}
+	for (i = 0; str[i] == ' '; i++)
+		;
+	for (; str[i + 1] != '\0'; i++)
+	{
+		buff[j] = str[i];
+		j++;
+	}
+	buff[j] = '\0';
+	if (buff[0] == '\0' || buff[0] == '#')
+	{
+		free(buff);
+		return ("\0");
+	}
+	return (buff);
+}
+/**
+ * hashtag_handler - function that removes everything after '#'
+ * @buff: input buffer
+ * Return: nothing
+ */
+void hashtag_handler(char *buff)
+{
+	int i;
+
+	for (i = 0; buff[i] != '\0'; i++)
+	{
+		if (buff[i] == '#' && buff[i - 1] == ' ' && buff[i + 1] == ' ')
+		{
+			buff[i] = '\0';
+		}
+	}
 }

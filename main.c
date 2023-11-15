@@ -1,51 +1,59 @@
-#include "waheed.h"
-
+#include "biggestheart.h"
 
 /**
- * main - Entry function for simple shell.
- * @argc: number of arguements entered.
- * @argv: array of arguments entered.
- * Return: 0 in case of success, 1 incase of failure.
+ * main - Entry point to program
+ * @argc: Argument count
+ * @argv: Argument vector
+ * Return: Returns condition
  */
+
 int main(__attribute__((unused)) int argc, char **argv)
 {
-	char read_input[COMMAND_BUFFER_SIZE], **cmd;
-	int nread = 0;
+	char *input, **cmd, **commands;
+	int count = 0, i, condition = 1, stat = 0;
 
-	while (1)
+	if (argv[1] != NULL)
+		read_file(argv[1], argv);
+	signal(SIGINT, signal_to_handle);
+
+	while (condition)
 	{
-		prompt(); /* Prompt ($ )*/
-		nread = _getline(STDIN_FILENO, read_input, COMMAND_BUFFER_SIZE);
-		if (nread >= 0)
+		count++;
+		if (isatty(STDIN_FILENO))
+			prompt();
+		input = _getline();
+		if (input[0] == '\0')
+			continue;
+		history(input);
+		commands = separator(input);
+		for (i = 0; commands[i] != NULL; i++)
 		{
-			get_commands(read_input, &cmd);
-			if (_strcmp(cmd[0], "echo") == 0)
-				echo_command(cmd, argv[0]);
-			else if (_strcmp(cmd[0], "cd") == 0)
-				printf("Im changing directory\n");
-			else if (_strcmp(cmd[0], "env") == 0)
-				print_env(argv[0]);
-			else if (_strcmp(cmd[0], "setenv") == 0)
-				add_env(cmd, argv[0]);
-			else if (_strcmp(cmd[0], "unsetenv") == 0)
-				remove_env(cmd, argv[0]);
-			else if (_strcmp(cmd[0], "ls") == 0 || strcmp(cmd[0], "/bin/ls") == 0)
-				ls_command(cmd, argv[0]);
-			else if (_strcmp(cmd[0], "alias") == 0)
-				exit(EXIT_SUCCESS);
-			else if (_strcmp(cmd[0], "exit") == 0 || _strcmp(cmd[0], "exit ") == 0)
-				exit_command(cmd);
+			cmd = parse_cmd(commands[i]);
+			if (_strcmp(cmd[0], "exit") == 0)
+			{
+				free(commands);
+				exit_bul(cmd, input, argv, count, stat);
+			}
+			else if (check_builtin(cmd) == 0)
+			{
+				stat = handle_builtin(cmd, stat);
+				free(cmd);
+				continue;
+			}
 			else
-				printf("%s: %s: command not found\n", argv[0], cmd[0]);
-			free_commands(&cmd);
+			{
+				stat = check_cmd(cmd, input, count, argv);
+			}
+			/*if (commands[i + 1] == NULL)
+			{
+				free(commands);
+				break;
+			}*/
+			free(cmd);
 		}
-		else
-		{
-			perror("hsh");
-			exit(EXIT_FAILURE);
-		}
-
+		free(input);
+		free(commands);
+		wait(&stat);
 	}
-
-	return (0);
+	return (stat);
 }
