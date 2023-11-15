@@ -64,5 +64,6 @@ int _strlen(char *string);
 int _strcmp(char *first, char *second);
 int _atoi(char *string);
 char *my_strdup(const char *str);
+int _strncmp(const char *first, const char *second, size_t n);
 
 #endif

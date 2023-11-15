@@ -21,6 +21,14 @@ int execute_command(char **cmd, char *file)
 	}
 	if (pid == 0)
 	{
+        if (_strncmp(*cmd, "./", 2) != 0 && _strncmp(*cmd, "/", 1) != 0)
+			path_cmd(cmd);
+		if (access(cmd[0], R_OK) != 0)
+		{
+			errprint(cmd[0]);
+			free_cmd_result(cmd);
+			exit(127);
+		}
 		if (execve(*cmd, cmd, environ) == -1)
 			return (2);
 		else

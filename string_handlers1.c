@@ -96,3 +96,30 @@ char *my_strdup(const char *str)
 
     return (duplicate);
 }
+
+/**
+ * _strncmp - function that compares two strings to required index.
+ * @first: The first string to be compared.
+ * @second: The second string to be compared.
+ * @num: The maximum number of characters to compare.
+ * Return: An integer less than, equal to, or greater than zero if 'first' is found,
+ * respectively, to be less than, to match, or be greater than 'second'.
+ */
+int _strncmp(const char *first, const char *second, size_t num)
+{
+    while (n > 0 && *first && *second && *first == *second)
+	{
+        first++;
+        second++;
+        num--;
+    }
+
+    if (num == 0)
+	{
+        return 0;
+    }
+	else
+	{
+        return (*(unsigned char *)first - *(unsigned char *)second);
+    }
+}
