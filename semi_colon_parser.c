@@ -41,7 +41,7 @@ char **semicolon_parser(char *input)
     int bufsize = BUFFER;
     int index = 0;
     char **commands = (char **)malloc(bufsize * sizeof(char *));
-    char *token = strtok(input, ";&");
+    char *token = strtok(input, ";");
     
     if (!commands) 
     {
@@ -64,7 +64,7 @@ char **semicolon_parser(char *input)
 
         token = remove_surrounding_spaces(token); 
         commands[index++] = my_strdup(token);
-        token = strtok(NULL, ";&");
+        token = strtok(NULL, ";");
     }
     commands[index] = NULL;
 

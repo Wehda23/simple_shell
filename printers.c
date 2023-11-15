@@ -25,3 +25,24 @@ void errprint(char *string)
         write(STDERR_FILENO, string, _strlen(string));
     }
 }
+
+/**
+ * print_commands - print commands from command array.
+ * @commands: commands to print.
+ */
+void print_commands(char **commands)
+{
+    int index = 0;
+    
+    if (commands != NULL)
+    {
+        cprint("\n");
+        while (commands[index] != NULL)
+        {
+            cprint(commands[index]);
+            cprint("\n");
+            index++;
+        }
+    }
+    
+}

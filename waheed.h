@@ -22,6 +22,9 @@ void handleHashtag(char *input);
 char *removeLeadingSpaces(char *input);
 char *remove_semicolon(char *str);
 
+/* checkers.c */
+int exit_check(char *string);
+
 /* semi_colon_parser.c */
 char *remove_surrounding_spaces(char *str);
 char **semicolon_parser(char *input);
@@ -34,10 +37,13 @@ char *_strtok(char *str, const char *delim);
 /* cmd_parser.c */
 char **cmd_parser(char *input, char *delim);
 void free_cmd_result(char ***result);
+char *replace_space_within_quotes(char *input, char replacement);
+void revert_replacement_to_spaces(char ***commands, char replacement);
 
 /* printers.c */
 void cprint(char *string);
 void errprint(char *string);
+void print_commands(char **commands);
 
 /* string_handers1.c */
 int _strlen(char *string);

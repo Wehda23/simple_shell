@@ -7,25 +7,33 @@
  */
 int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv)
 {
-    char *read_input, **cmd;
-    int index = 0;
-    
+    char *read_input, **cmd, **semicolon_cmd;
+    int semi_colon_count = 0;
+
     while (1)
     {
         prompt();
         read_input = getUserInput();
-        cprint("You entered: ");
-        cprint(read_input);
-        cmd = cmd_parser(read_input, " ");
-        cprint("\n");
-        while (cmd[index] != NULL)
+        semicolon_cmd = semicolon_parser(read_input);
+        
+        while (semicolon_cmd[semi_colon_count])
         {
-            cprint(cmd[index]);
+            cmd = cmd_parser(semicolon_cmd[semi_colon_count++], " ");
+            if (exit_check(cmd[0]) == 0)
+            {
+                cprint("exiting program ");
+            }
+            else
+            {
+                print_commands(cmd);
+                cprint("Command is: ");
+                cprint(cmd[0]);
+            }
             cprint("\n");
-            index++;
+            free_cmd_result(&cmd);
         }
-        free_cmd_result(&cmd);
-        index = 0;
+        semi_colon_count = 0;
+        free_semicolon_memory(&semicolon_cmd);
     }
     return (0);
 }
