@@ -28,7 +28,7 @@ int execute_command(char **cmd, char **semicmd, char *file)
 		{
 			errprint(cmd[0]);
 			free_cmd_result(&cmd);
-			free_semicolon_memory(&semicolon);
+			free_semicolon_memory(&semicmd);
 			exit(127);
 		}
 		if (execve(*cmd, cmd, environ) == -1)
