@@ -1,85 +1,67 @@
 #include "waheed.h"
 
-
-/**
- * _strtok - Function that tokenize (splits) string into array of tokens.
- * @command: pointer to a command string.
- * @delim: delimiter to split by.
- * Return: array of tokens generated from the command string input.
- */
-char *_strtok(char *command, char *delim)
+unsigned int check_delim(char c, const char *str)
 {
-	static char *lastToken;
-	char *token;
+    unsigned int result = 0;
 
-	if (command != NULL)
-		lastToken = command;
-	if (lastToken == NULL)
-		return (NULL);
+    while (*str != '\0')
+    {
+        if (c == *str++)
+        {
+            result = 1;
+            break;
+        }
+    }
 
-	token = lastToken + strspn(lastToken, delim);
-
-	if (*token == '\0')
-	{
-		lastToken = NULL;
-		return (NULL);
-	}
-	lastToken = token + strcspn(token, delim);
-	if (*lastToken != '\0')
-	{
-		*lastToken = '\0';
-		lastToken++;
-	}
-	else
-		lastToken = (NULL);
-
-	return (token);
+    return (result);
 }
 
-
-/**
- * get_commands - Get the commands object
- * @command: user input as string.
- * @commands: array that stores commands.
- * Return: char** type list of commands.
- */
-void get_commands(char *command, char ***commands)
+char *_strtok(char *str, const char *delim)
 {
-	char *token = _strtok(command, " ");
-	int initial_capacity = 2;
-	int command_index = 0;
-	int current_capacity = initial_capacity;
+    static char *token = NULL;
+    static char *next_token = NULL;
 
-	*commands = (char **)malloc(initial_capacity * sizeof(char *));
-	if (*commands == NULL)
-	{
-		fprintf(stderr, "Memory allocation failed\n");
-		exit(EXIT_FAILURE);
-	}
+    if (str != NULL)
+        next_token = str;
 
-	while (token != NULL)
-	{
-		if (command_index >= current_capacity - 1)
-		{
-			current_capacity *= 2;
-			*commands = (char **)realloc(*commands, current_capacity * sizeof(char *));
-			if (*commands == NULL)
-			{
-				fprintf(stderr, "Memory reallocation failed\n");
-				exit(EXIT_FAILURE);
-			}
-		}
-		(*commands)[command_index] = strdup(token);
+    token = next_token;
 
-		if ((*commands)[command_index] == NULL)
-		{
-			fprintf(stderr, "Memory allocation failed\n");
-			exit(EXIT_FAILURE);
-		}
+    if (token == NULL)
+        return (NULL);
 
-		token = _strtok(NULL, " "); /* Move to the next token */
-		command_index++;
-	}
+    while (*token != '\0')
+    {
+        if (check_delim(*token, delim) == 0)
+            break;
+        token++;
+    }
 
-	(*commands)[command_index] = NULL;
+    if (*token == '\0' || *token == '#')
+    {
+        next_token = NULL;
+        return (NULL);
+    }
+
+    next_token = token;
+
+    while (*next_token != '\0')
+    {
+        if (check_delim(*next_token, delim) == 1)
+            break;
+        next_token++;
+    }
+
+    if (*next_token == '\0')
+    {
+        next_token = NULL;
+    }
+    else
+    {
+        *next_token = '\0';
+        next_token++;
+        if (*next_token == '\0')
+            next_token = NULL;
+    }
+
+    return (token);
 }

@@ -3,16 +3,25 @@
 
 
 /**
- * print_commands - function that prints all commands entered
- * @commands: list commands entered
+ * cprint - function used to print a string 
+ * @string: the string that is going to be printed to standard output. 
  */
-void print_commands(char **commands)
+void cprint(char *string)
 {
-	int index = 0;
+    if (string != NULL)
+    {
+        write(1, string, _strlen(string));
+    }
+}
 
-	while (commands[index] != NULL)
-	{
-		printf("Command entered: %s\n", commands[index]);
-		index++;
-	}
+/**
+ * cprint - function used to prints to stderr
+ * @string: the string that is going to be printed to standard error. 
+ */
+void errprint(char *string)
+{
+    if (string != (NULL))
+    {
+        write(STDERR_FILENO, string, _strlen(string));
+    }
 }

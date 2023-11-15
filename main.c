@@ -2,50 +2,27 @@
 
 
 /**
- * main - Entry function for simple shell.
- * @argc: number of arguements entered.
- * @argv: array of arguments entered.
- * Return: 0 in case of success, 1 incase of failure.
+ * main - Entry function for simple shell
+ * Return: 0 in case of success otherwise 1 in case of failure.
  */
-int main(__attribute__((unused)) int argc, char **argv)
+int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv)
 {
-	char read_input[COMMAND_BUFFER_SIZE], **cmd;
-	int nread = 0;
+    char *read_input, **cmd;
+    int index = 0;
+    
+    while (1)
+    {
+        prompt();
+        read_input = getUserInput();
+        cmd = cmd_parser(read_input, " ");
 
-	while (1)
-	{
-		prompt(); /* Prompt ($ )*/
-		nread = _getline(STDIN_FILENO, read_input, COMMAND_BUFFER_SIZE);
-		if (nread >= 0)
-		{
-			get_commands(read_input, &cmd);
-			if (_strcmp(cmd[0], "echo") == 0)
-				echo_command(cmd, argv[0]);
-			else if (_strcmp(cmd[0], "cd") == 0)
-				printf("Im changing directory\n");
-			else if (_strcmp(cmd[0], "env") == 0)
-				print_env(argv[0]);
-			else if (_strcmp(cmd[0], "setenv") == 0)
-				add_env(cmd, argv[0]);
-			else if (_strcmp(cmd[0], "unsetenv") == 0)
-				remove_env(cmd, argv[0]);
-			else if (_strcmp(cmd[0], "ls") == 0 || strcmp(cmd[0], "/bin/ls") == 0)
-				ls_command(cmd, argv[0]);
-			else if (_strcmp(cmd[0], "alias") == 0)
-				exit(EXIT_SUCCESS);
-			else if (_strcmp(cmd[0], "exit") == 0 || _strcmp(cmd[0], "exit ") == 0)
-				exit_command(cmd);
-			else
-				printf("%s: %s: command not found\n", argv[0], cmd[0]);
-			free_commands(&cmd);
-		}
-		else
-		{
-			perror("hsh");
-			exit(EXIT_FAILURE);
-		}
-
-	}
-
-	return (0);
+        while (cmd[index] != NULL)
+        {
+            cprint(cmd[index]);
+            cprint("\n");
+            index++;
+        }
+        free_cmd_result(cmd);
+    }
+    return (0);
 }

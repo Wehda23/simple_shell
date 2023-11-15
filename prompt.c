@@ -2,11 +2,9 @@
 
 
 /**
- * prompt - is a function that prints ($) prompt
- * Return: void
+ * prompt - function that prints $ sign
  */
 void prompt(void)
 {
-	printf("$ ");
-	fflush(stdout);
+    cprint("$ ");
 }

@@ -19,7 +19,7 @@ int _strlen(char *string)
 		length++;
 	}
 
-	return (length - 1);
+	return (length);
 }
 
 /**
@@ -77,4 +77,24 @@ int _strcmp(char *first, char *second)
 	}
 
 	return (0);
+}
+
+/**
+ * my_strdup - Duplicates a string.
+ * @str: The string to duplicate.
+ * Return: Pointer to the newly allocated duplicated string,
+ *         or NULL if insufficient memory was available.
+ */
+char *my_strdup(const char *str) 
+{
+    size_t len = strlen(str) + 1;
+
+    char *duplicate = (char *)malloc(len * sizeof(char));
+
+    if (duplicate != NULL)
+	{
+        memcpy(duplicate, str, len);
+    }
+
+    return (duplicate);
 }

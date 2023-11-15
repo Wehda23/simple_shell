@@ -1,47 +1,47 @@
 #ifndef WAHEED_H
 #define WAHEED_H
 
-/* Imports */
+/* imports standard libraries */
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include <string.h>
-#include <sys/wait.h>
-#include <errno.h>
+#include <unistd.h>
 
-/* Predefined constants */
-#define COMMAND_BUFFER_SIZE 1024
-extern char **environ;
+/* constants */
+
+#define BUFFER 1024
 
 /* prompt.c */
 void prompt(void);
 
-/* listing_command.c */
-void ls_command(char **command, char *file);
-void echo_command(char **commands, char *file);
-void exit_command(char **commands);
-
-/* env_commands.c */
-void print_env(char *file);
-void add_env(char **commands, char *file);
-void remove_env(char **commands, char *file);
-
 /* _getline.c */
-int _getline(int fd, void *buf, int count);
+char *getUserInput();
+char *handleEnter(char *input);
+void handleHashtag(char *input);
+char *removeLeadingSpaces(char *input);
+char *remove_semicolon(char *str);
+
+/* semi_colon_parser.c */
+char *remove_surrounding_spaces(char *str);
+char **semicolon_parser(char *input);
+void free_semicolon_memory(char **commands);
 
 /* _strtok.c */
-char *_strtok(char *command, char *delim);
-void get_commands(char *command, char ***commands);
+unsigned int check_delim(char c, const char *str);
+char *_strtok(char *str, const char *delim);
 
-/* string_handlers.c */
-int _strlen(char *string);
-int _atoi(char *string);
-int _strcmp(char *first, char *second);
+/* cmd_parser.c */
+char **cmd_parser(char *input, char *delim);
+void free_cmd_result(char **result);
 
 /* printers.c */
-void print_commands(char **commands);
+void cprint(char *string);
+void errprint(char *string);
 
-/* free_memory.c */
-void free_commands(char ***commands);
+/* string_handers1.c */
+int _strlen(char *string);
+int _strcmp(char *first, char *second);
+int _atoi(char *string);
+char *my_strdup(const char *str);
 
 #endif
