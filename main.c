@@ -35,7 +35,6 @@ int main(__attribute__((unused)) int argc, char **argv)
 			{
 				status = execute_command(cmd, argv[0]);
 			}
-			cprint("\n");
 			free_cmd_result(&cmd);
 		}
 		semi_colon_count = 0;
